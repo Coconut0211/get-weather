@@ -1,9 +1,10 @@
 import net
 
-when isMainModule:
-  ## Реализуйте бесконечную инициализацию сокетов
-  ## для подключения к серверной части.
-  ## Название города считывайте с клавиатуры
-  ## (wttr поддерживает любой язык)
-  ## Стандартного recv(1024) более чем хватит.
 
+when isMainModule:
+  while true:
+    let client = newSocket()
+    client.connect("127.0.0.1",Port(8080))
+    client.send(stdin.readLine & "\n")
+    echo  client.recv(1024)
+    client.close()
